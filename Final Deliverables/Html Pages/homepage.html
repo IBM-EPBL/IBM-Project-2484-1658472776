@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;display=swap">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark navbar-custom">
+        <div class="container"><a class="navbar-brand fs-4" href="#">SKINNOVATION</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href='/register'>REGISTER</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/login'>Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="text-center text-white masthead">
+        <div class="masthead-content">
+            <div class="container">
+                <h1 class="masthead-heading mb-0">WELCOME!!</h1>
+                <h2 class="masthead-subheading mb-0">PREDICTION IS BETTER THAN CURE</h2><a class="btn btn-primary btn-xl rounded-pill mt-5" role="button" href="#">Learn More</a>
+            </div>
+        </div>
+        <div class="bg-circle-1 bg-circle"></div>
+        <div class="bg-circle-2 bg-circle" style="background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;);"></div>
+        <div class="bg-circle-3 bg-circle"></div>
+        <div class="bg-circle-4 bg-circle"></div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="p-5"><img class="rounded-circle img-fluid" src="{{url_for('static',filename='img/wp.jpeg')}}"></div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5">
+                        <h2 class="display-4">What we do!!!</h2>
+                        <p>CAD(Computer Aided Diagnosis) has been used in many medical fields but this is not the case with Dermatology . Experts usually perform non-invasive screening test only with naked eye thus reducing the accuracy of their diagnosis . Such diagnosis might not help in successful recovery or treatment of patients . We use CAD's efficiency in the field of Dermatology (to the extent of real life use) is proposed to be displayed with the help of both segmentation and classification models.<br></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5"><img class="rounded-circle img-fluid" src="{{url_for('static',filename='img/skin3.jpg')}}"></div>
+                </div>
+                <div class="col-lg-6 order-lg-2">
+                    <div class="p-5">
+                        <h2 class="display-4">Problem!!!</h2>
+                        <p>Skincare is a range of practices that support skin integrity, enhance its appearances and relieve skin conditions. It is the prevention of dermatitis and other skin diseases. Experts usually perform non-invasive screening test only with naked eye thus reducing the accuracy of their diagnosis . But we are going to find the attack of the disease with the help of deep learning techniques. We are goin to localize and classify multiple diseases in a single image.&nbsp;<br>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="p-5"><img class="rounded-circle img-fluid" src="{{url_for('static',filename='img/skincare-routine-steps-follow-for-clear-glowing-skin_1.webp')}}"></div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5">
+                        <h2 class="display-4">Solution!!!</h2>
+                        <p>We are going to localize the location in which the disease is present and classify what the disease is? using the deep learning techniques and methodologies. We are going to do it with and without segmentation and see which gives the better accuracy.&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{{url_for('static',filename='bootstrap/js/bootstrap.min.js')}}"></script>
+</body>
+
+</html>
