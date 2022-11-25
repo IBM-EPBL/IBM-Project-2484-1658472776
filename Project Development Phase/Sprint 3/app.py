@@ -1,3 +1,4 @@
+
 import numpy as np
 import os
 from tensorflow.keras.models import load_model
@@ -6,13 +7,13 @@ from tensorflow.keras.applications.inception_v3 import preprocess_input
 from flask import Flask, request,flash, render_template, redirect,url_for,session
 from cloudant.client import Cloudant
 from twilio.rest import Client
-model = load_model(r"Download_and_Convert_YOLO_Weights.h5")
+model = load_model(r"erythema_detection.h5") 
 app = Flask(__name__)
 app.secret_key="abc"
 app.config['UPLOAD_FOLDER'] = "User_Images"
 # Authenticate using an IAM API key
-client = Cloudant.iam('d3ffc21a-c9d1-4276-a7c3-d7a48a949e1f-bluemix',
-                        'oS6rF9Lb8-d8IyJW4VEdHx5kiIN9ehQnNoj8ygKXFjzu', connect=True)
+client = Cloudant.iam('7d22d94d-826f-45f8-b4b3-978d8295f90e-bluemix',
+                        '5om7V-HPoW2u-ZysZHXSWHeeud2-zmUEsueMa-lR0b1k', connect=True)
 # Create a database using an initialized client
 my_database = client.create_database('my_db')
 if my_database.exists():
@@ -33,10 +34,13 @@ def register():
         name =  request.form.get("name")
         mail = request.form.get("email")
         pswd = request.form.get("password")
+        print(name)
+        print(mail)
+        print(pswd)
         data = {
-            'name': name,
-            'mail': mail,
-            'psw': pswd
+           'name': name,
+           'mail': mail,
+           'psw': pswd
         }
         print(data)
         query = {'mail': {'$eq': data['mail']}}
@@ -55,7 +59,7 @@ def register():
 @app.route('/login', methods=['GET','POST'])
 def login():
         if request.method == "GET":
-            user = request.args.get('emailid')
+            user = request.args.get('email')
             passw = request.args.get('password')
             print(user, passw)
             query = {'mail': {'$eq': user}}
@@ -63,12 +67,12 @@ def login():
             print(docs)
             print(len(docs.all()))
             if (len(docs.all()) == 0):
-                return render_template('login.html', pred="")
+                return render_template('login.html')
             else:
                 if ((user == docs[0][0]['mail'] and passw == docs[0][0]['psw'])):
                     session['user'] = user
                     flash("Logged in as " + str(user))
-                    return render_template('homepage.html', pred="Logged in as "+str(user), vis ="hidden", vis2="visible")
+                    return render_template('prediction.html', pred="Logged in as "+str(user), vis ="hidden", vis2="visible")
                 else:
                     return render_template('login.html', pred="The password is wrong.")
         else:
@@ -97,22 +101,9 @@ def predict():
             #print ( x )
             img_data = preprocess_input(x)
             prediction = np.argmax(model.predict(img_data), axis=1)
-            index = ['Erythema chronicum migrans', 'Erythema infectiosum', 'Erythema marginatum', 'palmer erythema']
+            index = [' No erythema ','Erythema chronicum migrans','Erythema infectiosum','Erythema marginatum','Palmar erythema']
             result = str(index[prediction[0]])
             print(result)
-            account_sid = 'ACe84a385fa5539d372c1a924452f489a3'
-            auth_token = '359788a4ddfb510ac8ecd2fa948b924e'
-        
-            client = Client(account_sid, auth_token)
-        
-            ''' Change the value of 'from' with the number 
-            received from Twilio and the value of 'to'
-            with the number in which you want to send message.'''
-            message = client.messages.create(
-                                    from_='+17088347950',
-                                    body ='Results: '+ result,
-                                    to ='+919500680243'
-                                )
             return render_template('prediction.html', prediction=result, fname = filepath)
         else:
             return render_template("prediction.html")
